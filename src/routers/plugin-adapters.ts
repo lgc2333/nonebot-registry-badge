@@ -13,15 +13,15 @@ export async function constructPluginAdaptersBadge(
   query: string,
   forceShow?: boolean,
 ): Promise<ShieldsResponse> {
-  const plugins = await fetchPluginsResult()
-  const data = queryFromPlugins(plugins, query)
-  if (!data) return pluginNotFoundShieldsResponse
-
   const baseResponse = {
     ...baseShieldsResponse,
     label: 'Supported Adapters',
     color: '#ea5252',
   } satisfies Partial<ShieldsResponse>
+
+  const plugins = await fetchPluginsResult()
+  const data = queryFromPlugins(plugins, query)
+  if (!data) return { ...pluginNotFoundShieldsResponse, label: 'Supported Adapters' }
 
   const adapters = await fetchAdaptersResult()
   if (!forceShow) {

@@ -46,6 +46,7 @@ https://nbbdg.lgc2333.top/plugin-adapters/<query>?force_show=true
 
 [![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-alconna)](https://registry.nonebot.dev/plugin/nonebot-plugin-alconna:nonebot_plugin_alconna)  
 [![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-send-anything-anywhere)](https://registry.nonebot.dev/plugin/nonebot-plugin-send-anything-anywhere:nonebot_plugin_saa)  
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-session)](https://registry.nonebot.dev/plugin/nonebot-plugin-session:nonebot_plugin_session)  
 [![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-status)](https://registry.nonebot.dev/plugin/nonebot-plugin-status:nonebot_plugin_status)  
 [![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-bilichat)](https://registry.nonebot.dev/plugin/nonebot-plugin-bilichat:nonebot_plugin_bilichat)  
 [![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-send-anything-anywhere?force_show=true)](https://registry.nonebot.dev/plugin/nonebot-plugin-send-anything-anywhere:nonebot_plugin_saa)

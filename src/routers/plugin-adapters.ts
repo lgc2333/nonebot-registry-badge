@@ -9,6 +9,12 @@ import {
   queryFromPlugins,
 } from '../utils'
 
+const checkSames = [
+  ['nonebot_plugin_alconna', 'Alconna'],
+  ['nonebot_plugin_saa', 'SAA'],
+  ['nonebot_plugin_session', 'Session'],
+]
+
 export async function constructPluginAdaptersBadge(
   query: string,
   forceShow?: boolean,
@@ -25,9 +31,9 @@ export async function constructPluginAdaptersBadge(
 
   const adapters = await fetchAdaptersResult()
   if (!forceShow) {
-    const isAllAdapterSupported = adapters.every((it) =>
-      data.supported_adapters?.find((a) => a === it.module_name),
-    )
+    const isAllAdapterSupported =
+      data.supported_adapters?.length === adapters.length &&
+      adapters.every((it) => data.supported_adapters?.find((a) => a === it.module_name))
     if (isAllAdapterSupported) {
       return { ...baseResponse, message: 'All' }
     }
@@ -37,15 +43,15 @@ export async function constructPluginAdaptersBadge(
         (it) => it.module_name === targetModule,
       )?.supported_adapters
       return targetAdapters
-        ? targetAdapters.every((it) => data.supported_adapters?.find((a) => a === it))
+        ? data.supported_adapters?.length === targetAdapters.length &&
+            targetAdapters.every((it) => data.supported_adapters?.find((a) => a === it))
         : false
     }
 
-    if (checkSupportedSameAdapters('nonebot_plugin_alconna')) {
-      return { ...baseResponse, message: 'Same as Alconna' }
-    }
-    if (checkSupportedSameAdapters('nonebot_plugin_saa')) {
-      return { ...baseResponse, message: 'Same as SAA' }
+    for (const [moduleName, sameName] of checkSames) {
+      if (checkSupportedSameAdapters(moduleName)) {
+        return { ...baseResponse, message: `Same as ${sameName}` }
+      }
     }
   }
 

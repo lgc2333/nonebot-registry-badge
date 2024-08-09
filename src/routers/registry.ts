@@ -26,7 +26,7 @@ export function constructShieldsResponse(
 }
 
 export async function fetchRegistryResults(): Promise<RegistryResult> {
-  return fetch('https://registry.nonebot.dev/plugins.json').then((res) => res.json())
+  return fetch('https://registry.nonebot.dev/results.json').then((res) => res.json())
 }
 
 export async function registryRouter({ args }: RouterHandlerParams): Promise<Response> {

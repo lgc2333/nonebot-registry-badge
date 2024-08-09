@@ -27,6 +27,11 @@ export function trim(str: string, char: string): string {
   return str
 }
 
+export function isTruthy(value?: string | null): boolean {
+  if (!value) return false
+  return ['true', '1', 'yes'].includes(value.trim().toLowerCase())
+}
+
 export async function fetchPluginsResult(): Promise<PluginsResult> {
   return fetch('https://registry.nonebot.dev/plugins.json').then((res) => res.json())
 }
@@ -48,8 +53,8 @@ export function makePluginQueryFunc<P, T>(
       return (
         projectName === query ||
         moduleName === query ||
-        (projectNamePrefix && projectName === `${projectNamePrefix}-${query}`) ||
-        (moduleNamePrefix && moduleName === `${moduleNamePrefix}-${query}`)
+        (projectNamePrefix && projectName === `${projectNamePrefix}${query}`) ||
+        (moduleNamePrefix && moduleName === `${moduleNamePrefix}${query}`)
       )
     })
     return found || null

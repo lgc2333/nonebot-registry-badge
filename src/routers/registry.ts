@@ -31,11 +31,19 @@ export async function fetchRegistryResults(): Promise<RegistryResult> {
 
 export async function registryRouter({ args }: RouterHandlerParams): Promise<Response> {
   if (args.length > 1) return new Response(null, { status: 404 })
+  const [query] = args
   const results = await fetchRegistryResults()
   const data = (() => {
     for (const [key, value] of Object.entries(results)) {
       const [projectName, packageName] = key.split(':')
-      if (projectName === args[0] && packageName === args[1]) return value
+      if (
+        projectName === query ||
+        packageName === query ||
+        projectName === `nonebot-plugin-${query}` ||
+        packageName === `nonebot_plugin_${query}`
+      ) {
+        return value
+      }
     }
     return null
   })()

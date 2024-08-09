@@ -13,12 +13,14 @@ export function constructShieldsResponse(
     return {
       ...baseShieldsResponse,
       message: data.results.validation ? 'passing' : 'failing',
+      color: data.results.validation ? 'brightgreen' : 'red',
     }
   } else {
     return {
       ...baseShieldsResponse,
       isError: true,
       message: 'Plugin Not Found',
+      color: 'red',
     }
   }
 }

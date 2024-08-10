@@ -4,11 +4,13 @@ import {
   baseShieldsResponse,
   fetchAdaptersResult,
   fetchPluginsResult,
+  fetchRegistryResults,
   isTruthy,
   pluginNotFoundShieldsResponse,
   queryFromPlugins,
 } from '../utils'
 
+const label = 'Supported Adapters'
 const checkSames = [
   ['nonebot_plugin_alconna', 'Alconna'],
   ['nonebot_plugin_saa', 'SAA'],
@@ -21,13 +23,22 @@ export async function constructPluginAdaptersBadge(
 ): Promise<ShieldsResponse> {
   const baseResponse = {
     ...baseShieldsResponse,
-    label: 'Supported Adapters',
+    label,
     color: '#ea5252',
   } satisfies Partial<ShieldsResponse>
 
   const plugins = await fetchPluginsResult()
   const data = queryFromPlugins(plugins, query)
-  if (!data) return { ...pluginNotFoundShieldsResponse, label: 'Supported Adapters' }
+  if (!data) return { ...pluginNotFoundShieldsResponse, label }
+
+  if (!data.supported_adapters) {
+    const registryResults = await fetchRegistryResults()
+    const pluginResult = registryResults[`${data.project_link}:${data.module_name}`]
+    if (!pluginResult) return { ...pluginNotFoundShieldsResponse, label }
+    if (!pluginResult.results.metadata) {
+      return { ...baseResponse, color: 'red', message: 'No data' }
+    }
+  }
 
   const adapters = await fetchAdaptersResult()
   if (!forceShow) {

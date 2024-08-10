@@ -1,4 +1,9 @@
-import { AdaptersResult, PluginsResult, ShieldsResponse } from './types'
+import {
+  AdaptersResult,
+  PluginsResult,
+  RegistryResults,
+  ShieldsResponse,
+} from './types'
 
 export const logoSvg = `
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -38,6 +43,10 @@ export async function fetchPluginsResult(): Promise<PluginsResult> {
 
 export async function fetchAdaptersResult(): Promise<AdaptersResult> {
   return fetch('https://registry.nonebot.dev/adapters.json').then((res) => res.json())
+}
+
+export async function fetchRegistryResults(): Promise<RegistryResults> {
+  return fetch('https://registry.nonebot.dev/results.json').then((res) => res.json())
 }
 
 export function makePluginQueryFunc<P, T>(

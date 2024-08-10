@@ -26,3 +26,13 @@ export interface AdapterItem {
   name: string
 }
 export type AdaptersResult = AdapterItem[]
+
+export interface RegistryResultItemResults {
+  validation: boolean
+  load: boolean
+  metadata: boolean
+}
+export interface RegistryResultItem {
+  results: RegistryResultItemResults
+}
+export type RegistryResults = Record<string, RegistryResultItem>

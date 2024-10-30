@@ -13,6 +13,7 @@ import {
 const label = 'Supported Adapters'
 const checkSames = [
   ['nonebot_plugin_alconna', 'Alconna'],
+  ['nonebot_plugin_uninfo', 'UniInfo'],
   ['nonebot_plugin_saa', 'SAA'],
   ['nonebot_plugin_session', 'Session'],
 ]

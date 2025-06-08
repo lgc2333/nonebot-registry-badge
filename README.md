@@ -33,7 +33,7 @@ https://nbbdg.lgc2333.top/plugin/<query>
 #### Endpoint & Params
 
 ```plaintext
-https://nbbdg.lgc2333.top/plugin-adapters/<query>?force_show=true
+https://nbbdg.lgc2333.top/plugin-adapters/<query>?force_show=false&force_all=false&truncate_count=0
 ```
 
 - `<query>`: Can be one of the following:
@@ -41,21 +41,45 @@ https://nbbdg.lgc2333.top/plugin-adapters/<query>?force_show=true
   - Plugin module name (Without `nonebot_plugin_` prefix is OK)
 - `force_show`: Optional, default is `false`.  
   Set to `true` to force show all adapters instead `Same as xxx` or `All`.
+- `force_all`: Optional, default is `false`.  
+  Set to `true` to show all adapters without truncation, regardless of `truncate_count`. If plugin adapters detected same as XXX, please set `force_show` to `true` to take effect.
+- `truncate_count`: Optional, default is `0`.  
+  Specifies the maximum number of adapters to display. If more adapters exist, they will be truncated.
+  When set to `0`, only the total count will be shown if truncation occurs.
+  When set to a positive number, it will show that many adapters followed by "& ... (X adapters total)".
 
 #### Examples
 
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-alconna)](https://registry.nonebot.dev/plugin/nonebot-plugin-alconna:nonebot_plugin_alconna)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-send-anything-anywhere)](https://registry.nonebot.dev/plugin/nonebot-plugin-send-anything-anywhere:nonebot_plugin_saa)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-session)](https://registry.nonebot.dev/plugin/nonebot-plugin-session:nonebot_plugin_session)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-status)](https://registry.nonebot.dev/plugin/nonebot-plugin-status:nonebot_plugin_status)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-bilichat)](https://registry.nonebot.dev/plugin/nonebot-plugin-bilichat:nonebot_plugin_bilichat)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-send-anything-anywhere?force_show=true)](https://registry.nonebot.dev/plugin/nonebot-plugin-send-anything-anywhere:nonebot_plugin_saa)
+**Basic usage:**
+
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-alconna)](https://registry.nonebot.dev/plugin/nonebot-plugin-alconna:nonebot_plugin_alconna)
 
 ```markdown
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-alconna)](https://registry.nonebot.dev/plugin/nonebot-plugin-alconna:nonebot_plugin_alconna)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-send-anything-anywhere)](https://registry.nonebot.dev/plugin/nonebot-plugin-send-anything-anywhere:nonebot_plugin_saa)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-session)](https://registry.nonebot.dev/plugin/nonebot-plugin-session:nonebot_plugin_session)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-status)](https://registry.nonebot.dev/plugin/nonebot-plugin-status:nonebot_plugin_status)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-bilichat)](https://registry.nonebot.dev/plugin/nonebot-plugin-bilichat:nonebot_plugin_bilichat)  
-[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-send-anything-anywhere?force_show=true)](https://registry.nonebot.dev/plugin/nonebot-plugin-send-anything-anywhere:nonebot_plugin_saa)
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-alconna)](https://registry.nonebot.dev/plugin/nonebot-plugin-alconna:nonebot_plugin_alconna)
+```
+
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-send-anything-anywhere)](https://registry.nonebot.dev/plugin/nonebot-plugin-send-anything-anywhere:nonebot_plugin_saa)
+
+```markdown
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-send-anything-anywhere)](https://registry.nonebot.dev/plugin/nonebot-plugin-send-anything-anywhere:nonebot_plugin_saa)
+```
+
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-status)](https://registry.nonebot.dev/plugin/nonebot-plugin-status:nonebot_plugin_status)
+
+```markdown
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-status)](https://registry.nonebot.dev/plugin/nonebot-plugin-status:nonebot_plugin_status)
+```
+
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-bilichat)](https://registry.nonebot.dev/plugin/nonebot-plugin-bilichat:nonebot_plugin_bilichat)
+
+```markdown
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-bilichat)](https://registry.nonebot.dev/plugin/nonebot-plugin-bilichat:nonebot_plugin_bilichat)
+```
+
+**With parameters:**
+
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-alconna%3Fforce_show%3Dtrue%26truncate_count=3)](https://registry.nonebot.dev/plugin/nonebot-plugin-alconna:nonebot_plugin_alconna)
+
+```markdown
+[![Supported Adapters](https://img.shields.io/endpoint?url=https%3A%2F%2Fnbbdg.lgc2333.top%2Fplugin-adapters%2Fnonebot-plugin-alconna%3Fforce_show%3Dtrue%26truncate_count=3)](https://registry.nonebot.dev/plugin/nonebot-plugin-alconna:nonebot_plugin_alconna)
 ```

@@ -18,6 +18,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install Corepack
+        run: |-
+          npm install -g corepack
+          corepack enable
+
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:

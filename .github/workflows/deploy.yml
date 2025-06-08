@@ -27,6 +27,9 @@ jobs:
           npm install -g corepack
           corepack enable
 
+      - name: Install Node dependencies
+        run: yarn
+
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:

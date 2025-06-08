@@ -1,6 +1,6 @@
 import { trim } from './utils'
 
-export type RouterHandlerParams = {
+export interface RouterHandlerParams {
   url: URL
   args: string[]
   request: Request

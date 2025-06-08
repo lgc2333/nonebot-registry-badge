@@ -1,5 +1,6 @@
-import routeManager, { RouterHandlerParams } from '../route'
-import { PluginItem, ShieldsResponse } from '../types'
+import type { RouterHandlerParams } from '../route'
+import routeManager from '../route'
+import type { PluginItem, ShieldsResponse } from '../types'
 import {
   baseShieldsResponse,
   fetchPluginsResult,

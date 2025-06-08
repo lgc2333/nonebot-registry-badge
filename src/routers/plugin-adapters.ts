@@ -1,5 +1,6 @@
-import routeManager, { RouterHandlerParams } from '../route'
-import { ShieldsResponse } from '../types'
+import type { RouterHandlerParams } from '../route'
+import routeManager from '../route'
+import type { ShieldsResponse } from '../types'
 import {
   baseShieldsResponse,
   fetchAdaptersResult,
@@ -21,6 +22,8 @@ const checkSames = [
 export async function constructPluginAdaptersBadge(
   query: string,
   forceShow?: boolean,
+  forceAll?: boolean,
+  truncateCount = 0,
 ): Promise<ShieldsResponse> {
   const baseResponse = {
     ...baseShieldsResponse,
@@ -41,13 +44,19 @@ export async function constructPluginAdaptersBadge(
     }
   }
 
+  if (!data.supported_adapters || !data.supported_adapters.length) {
+    return { ...baseResponse, message: 'Any' }
+  }
+
+  const lenTip = `${data.supported_adapters.length} adapters`
   const adapters = await fetchAdaptersResult()
+
   if (!forceShow) {
     const isAllAdapterSupported =
-      data.supported_adapters?.length === adapters.length &&
-      adapters.every((it) => data.supported_adapters?.find((a) => a === it.module_name))
+      data.supported_adapters.length === adapters.length &&
+      adapters.every((it) => data.supported_adapters!.find((a) => a === it.module_name))
     if (isAllAdapterSupported) {
-      return { ...baseResponse, message: 'All' }
+      return { ...baseResponse, message: `All (${lenTip})` }
     }
 
     const checkSupportedSameAdapters = (targetModule: string) => {
@@ -55,28 +64,39 @@ export async function constructPluginAdaptersBadge(
         (it) => it.module_name === targetModule,
       )?.supported_adapters
       return targetAdapters
-        ? data.supported_adapters?.length === targetAdapters.length &&
-            targetAdapters.every((it) => data.supported_adapters?.find((a) => a === it))
+        ? data.supported_adapters!.length === targetAdapters.length &&
+            targetAdapters.every((it) => data.supported_adapters!.find((a) => a === it))
         : false
     }
 
     for (const [moduleName, sameName] of checkSames) {
       if (checkSupportedSameAdapters(moduleName)) {
-        return { ...baseResponse, message: `Same as ${sameName}` }
+        return { ...baseResponse, message: `Same as ${sameName} (${lenTip})` }
       }
     }
   }
 
+  let truncated = false
+  let shownAdapters = data.supported_adapters
+  if (data.supported_adapters.length > truncateCount && !forceAll) {
+    truncated = true
+    shownAdapters = data.supported_adapters.slice(0, truncateCount)
+  }
+
+  const baseMsg = shownAdapters
+    ?.map(
+      (it) =>
+        adapters.find((a) => a.module_name === it)?.name ||
+        it.replace('nonebot.adapters.', '~'),
+    )
+    .join(' & ')
   return {
     ...baseResponse,
-    message:
-      data.supported_adapters
-        ?.map(
-          (it) =>
-            adapters.find((a) => a.module_name === it)?.name ||
-            it.replace('nonebot.adapters.', '~'),
-        )
-        .join(' & ') || 'Any',
+    message: truncated
+      ? truncateCount
+        ? `${baseMsg} & ... (${lenTip} total)`
+        : lenTip
+      : baseMsg,
   }
 }
 
@@ -87,11 +107,14 @@ export async function pluginAdaptersRouter({
   if (args.length > 1) return new Response(null, { status: 404 })
   const [query] = args
   const forceShow = isTruthy(url.searchParams.get('force_show'))
+  const forceAll = isTruthy(url.searchParams.get('force_all'))
+  const truncateCountQuery = url.searchParams.get('truncate_count')
+  const truncateCount = truncateCountQuery ? Number.parseInt(truncateCountQuery, 10) : 0
   return new Response(
-    JSON.stringify(await constructPluginAdaptersBadge(query, forceShow)),
-    {
-      headers: { 'content-type': 'application/json' },
-    },
+    JSON.stringify(
+      await constructPluginAdaptersBadge(query, forceShow, forceAll, truncateCount),
+    ),
+    { headers: { 'content-type': 'application/json' } },
   )
 }
 

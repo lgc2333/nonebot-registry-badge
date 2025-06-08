@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.base",
-  "exclude": ["test"],
-  "include": ["worker-configuration.d.ts", "src/**/*.ts"]
+  "include": ["worker-configuration.d.ts", "src/**/*.ts"],
+  "exclude": ["test"]
 }

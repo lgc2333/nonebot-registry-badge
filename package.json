@@ -1,7 +1,9 @@
 {
   "name": "nonebot-registry-badge",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "yarn@4.9.2",
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
@@ -10,19 +12,18 @@
     "cf-typegen": "wrangler types"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.4.5",
-    "@cloudflare/workers-types": "^4.20240806.0",
-    "@cordisjs/eslint-config": "^1.1.1",
-    "@typescript-eslint/eslint-plugin": "7.18.0",
-    "@typescript-eslint/parser": "7.18.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-promise": "^6.6.0",
-    "eslint-plugin-react": "^7.35.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "typescript": "^5.5.2",
-    "vitest": "1.5.0",
-    "wrangler": "^3.60.3"
-  },
-  "packageManager": "yarn@4.9.2"
+    "@antfu/eslint-config": "^4.14.1",
+    "@cloudflare/vitest-pool-workers": "^0.8.36",
+    "@cloudflare/workers-types": "^4.20250607.0",
+    "@eslint-react/eslint-plugin": "^1.51.2",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "vitest": "3.2.2",
+    "wrangler": "^4.19.1"
+  }
 }
